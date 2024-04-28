@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>polarsserver.lol</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #252525;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #191919;
+      width: 400px;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    .cat-gif {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      color: white;
+      background-color: #191919;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #7289da;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #677bc4;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>polarsserver.lol</h1>
+    <div id="catGifContainer"></div>
+    <button onclick="loadCatGif()" class="button" id="catButton">Cat</button>
+    <a href="https://discord.gg/pCwG5rXaUh" class="button">Discord</a>
+  </div>
+  <div class="footer">
+    &copy; GoobWare 2024
+  </div>
+
+  <script>
+    var loadedGifUrls = []; // Array to store loaded GIF URLs
+
+    window.onload = function() {
+      loadCatGif(); // Load cat GIF when the page loads
+    };
+
+    function loadCatGif() {
+      var container = document.getElementById("catGifContainer");
+      var catButton = document.getElementById("catButton");
+      container.innerHTML = ""; // Clear previous GIFs
+      catButton.disabled = true; // Disable the button
+
+      // Fetch GIFs from API
+      fetch("https://api.codetabs.com/v1/proxy?quest=https://tenor.com/search/cats-gifs")
+        .then(response => response.text())
+        .then(data => {
+          var parser = new DOMParser();
+          var htmlDoc = parser.parseFromString(data, 'text/html');
+          var gifs = htmlDoc.querySelectorAll("img");
+
+          // Extract valid GIF URLs
+          var validGifs = [];
+          gifs.forEach(gif => {
+            if (gif.src.endsWith(".gif") && !loadedGifUrls.includes(gif.src)) {
+              validGifs.push(gif.src);
+            }
+          });
+
+          // If no valid GIFs found
+          if (validGifs.length === 0) {
+            var errorMessage = document.createElement("p");
+            errorMessage.textContent = "No new cat GIFs found. Try again later.";
+            container.appendChild(errorMessage);
+          } else {
+            // Choose a random GIF
+            var randomIndex = Math.floor(Math.random() * validGifs.length);
+            var randomGifUrl = validGifs[randomIndex];
+
+            // Store loaded GIF URL
+            loadedGifUrls.push(randomGifUrl);
+
+            // Create and append the image element
+            var img = document.createElement("img");
+            img.src = randomGifUrl;
+            img.classList.add("cat-gif");
+            container.appendChild(img);
+          }
+
+          catButton.disabled = false; // Re-enable the button
+        })
+        .catch(error => {
+          console.error("Error fetching cat GIFs:", error);
+          var errorMessage = document.createElement("p");
+          errorMessage.textContent = "Error fetching cat GIFs. Please try again later.";
+          container.appendChild(errorMessage);
+          catButton.disabled = false; // Re-enable the button
+        });
+    }
+  </script>
+</body>
+</html>
