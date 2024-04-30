@@ -26,109 +26,313 @@
       position: relative;
     }
 
-    .cat-gif {
-      max-width: 100%;
-      border-radius: 10px;
-      margin-bottom: 20px;
+    .tooltip {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 5px 10px;
+      border-radius: 5px;
+      user-select: none; /* Prevent text selection */
+      z-index: 999; /* Ensure tooltip is above other elements */
     }
 
-    .footer {
+    .tooltip-auto {
+      top: 110%; /* Position tooltip 10% below the container */
+    }
+
+    .tooltip-ip {
+      top: 150%; /* Position IP tooltip 50% below the container */
+    }
+
+    .top-container {
+      background-color: #191919;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      color: white;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none; /* Prevent text selection */
+    }
+
+    .top-container a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      padding: 8px 16px;
+      border: 1px solid white;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .top-container a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .container .button {
+      background-color: #6c757d; /* Grey background color */
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      border: none; /* Remove border */
+      cursor: pointer; /* Change cursor to pointer on hover */
+      margin-bottom: 10px; /* Add margin-bottom */
+    }
+
+    .container .button:hover {
+      background-color: #5a6268; /* Darker grey on hover */
+    }
+    
+    .unselectable {
+      user-select: none;
+    }
+
+    .top-title {
+      font-size: 24px; /* Set the font size to 24px */
+    }
+    
+    .copyright {
       position: fixed;
       bottom: 10px;
       right: 10px;
       color: white;
-      background-color: #191919;
-      padding: 5px 10px;
-      border-radius: 5px;
+      font-size: 12px;
+      user-select: none;
     }
 
-    .button {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #7289da;
+    /* Popup styles */
+    .popup-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+      display: none; /* Initially hidden */
+      justify-content: center;
+      align-items: center;
+      z-index: 1000; /* Ensure it's above other elements */
+      backdrop-filter: blur(5px); /* Blur the background */
+      animation: fadeInOut 0.5s ease; /* Apply fade in and out animation */
+    }
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    .popup {
+      background-color: #191919; /* Use same theme as UI container */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* Drop shadow */
+      position: relative;
+      width: 600px; /* Make the popup wider */
+      height: 400px; /* Make the popup taller */
       color: white;
-      border: none;
-      border-radius: 5px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+      display: flex;
+      flex-direction: column;
     }
 
-    .button:hover {
-      background-color: #677bc4;
+    .popup-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      align-self: flex-start; /* Align title to the left */
+      user-select: none; /* Prevent text selection */
+    }
+
+    .popup-content {
+      flex-grow: 1; /* Allow content to grow */
+      overflow-y: auto; /* Enable vertical scrolling */
+    }
+
+    .popup-field {
+      margin-bottom: 20px; /* Increase spacing between fields */
+    }
+
+    .popup-field-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+      user-select: none; /* Prevent text selection */
+    }
+
+    .popup-field-body {
+      margin-bottom: 10px;
+      user-select: none; /* Prevent text selection */
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 20px;
+      user-select: none; /* Prevent text selection */
+    }
+
+    /* Ensure popup stays within viewport */
+    @media screen and (max-width: 600px) {
+      .popup {
+        max-width: calc(100% - 40px); /* Adjust maximum width for smaller screens */
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>polarsserver.lol</h1>
-    <div id="catGifContainer"></div>
-    <button onclick="loadCatGif()" class="button" id="catButton">Cat</button>
-    <a href="https://discord.gg/pCwG5rXaUh" class="button">Discord</a>
+  <div class="top-container">
+    <div class="unselectable top-title">polarsserver</div>
+    <div>
+      <a href="https://discord.gg/pCwG5rXaUh" class="button" target="_blank">Discord</a>
+      <a href="#" class="button">Commands</a>
+      <a href="#" class="button">Recipes</a>
+      <a href="#" class="button">Dimensions</a>
+      <a href="#" class="button">FAQ</a>
+    </div>
   </div>
-  <div class="footer">
-    &copy; GoobWare 2024
+
+  <div class="container">
+    <h1 class="unselectable">polarsserver.lol</h1>
+    <p class="unselectable">A not quite vanilla Minecraft server.</p>
+    <button class="button" id="copyIpButton">Copy IP</button>
+    <div class="tooltip tooltip-ip" id="copyTooltip">IP copied to clipboard!</div>
+    <div class="tooltip tooltip-auto" id="tooltip">Tooltip text</div>
+    <!-- Example of a popup trigger -->
+    <button class="button" id="openPopupButton">Open Popup</button>
+  </div>
+
+  <div class="popup-container" id="popupContainer">
+    <div class="popup">
+      <div class="popup-title" id="popupTitle"></div>
+      <div class="close-btn" id="closePopupButton">X</div>
+      <div class="popup-content" id="popupContent"></div>
+    </div>
+  </div>
+
+  <div class="copyright">
+    &copy; Polar 2024
   </div>
 
   <script>
-    var loadedGifUrls = []; // Array to store loaded GIF URLs
-
-    window.onload = function() {
-      loadCatGif(); // Load cat GIF when the page loads
-    };
-
-    function loadCatGif() {
-      var container = document.getElementById("catGifContainer");
-      var catButton = document.getElementById("catButton");
-      container.innerHTML = ""; // Clear previous GIFs
-      catButton.disabled = true; // Disable the button
-
-      // Fetch GIFs from API
-      fetch("https://api.codetabs.com/v1/proxy?quest=https://tenor.com/search/cats-gifs")
-        .then(response => response.text())
-        .then(data => {
-          var parser = new DOMParser();
-          var htmlDoc = parser.parseFromString(data, 'text/html');
-          var gifs = htmlDoc.querySelectorAll("img");
-
-          // Extract valid GIF URLs
-          var validGifs = [];
-          gifs.forEach(gif => {
-            if (gif.src.endsWith(".gif") && !loadedGifUrls.includes(gif.src)) {
-              validGifs.push(gif.src);
-            }
-          });
-
-          // If no valid GIFs found
-          if (validGifs.length === 0) {
-            var errorMessage = document.createElement("p");
-            errorMessage.textContent = "No new cat GIFs found. Try again later.";
-            container.appendChild(errorMessage);
-          } else {
-            // Choose a random GIF
-            var randomIndex = Math.floor(Math.random() * validGifs.length);
-            var randomGifUrl = validGifs[randomIndex];
-
-            // Store loaded GIF URL
-            loadedGifUrls.push(randomGifUrl);
-
-            // Create and append the image element
-            var img = document.createElement("img");
-            img.src = randomGifUrl;
-            img.classList.add("cat-gif");
-            container.appendChild(img);
-          }
-
-          catButton.disabled = false; // Re-enable the button
-        })
-        .catch(error => {
-          console.error("Error fetching cat GIFs:", error);
-          var errorMessage = document.createElement("p");
-          errorMessage.textContent = "Error fetching cat GIFs. Please try again later.";
-          container.appendChild(errorMessage);
-          catButton.disabled = false; // Re-enable the button
-        });
+    // Function to fetch tooltips from JSON file
+    async function fetchTooltips() {
+      try {
+        const response = await fetch('/data/tooltips.json');
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error('Error fetching tooltips:', error);
+        return [];
+      }
     }
+
+    // Function to update tooltip text
+    async function updateTooltip() {
+      const tooltips = await fetchTooltips();
+      const tooltipElement = document.getElementById("tooltip");
+      let tooltipIndex = 0;
+
+      setInterval(async function() {
+        // Fade out the tooltip
+        tooltipElement.style.opacity = 0;
+
+        // Update tooltip index
+        tooltipIndex = (tooltipIndex + 1) % tooltips.length;
+        
+        // Update tooltip text after fade out
+        setTimeout(function() {
+          tooltipElement.textContent = tooltips[tooltipIndex];
+          
+          // Fade in the tooltip
+          tooltipElement.style.opacity = 1;
+        }, 300);
+      }, 3000); // Change tooltip every 3 seconds
+    }
+
+    // Call the function to update tooltip
+    updateTooltip();
+
+    // Your existing JavaScript code
+    document.getElementById("copyIpButton").addEventListener("click", function() {
+      var ip = "mc.polarsserver.lol";
+      navigator.clipboard.writeText(ip)
+        .then(function() {
+          console.log("IP copied to clipboard: " + ip);
+          var tooltip = document.getElementById("copyTooltip");
+          tooltip.textContent = "IP copied to clipboard!";
+          tooltip.style.opacity = 1;
+          setTimeout(function() {
+            tooltip.style.opacity = 0;
+          }, 2000); // Hide tooltip after 2 seconds
+
+          // Reset tooltip fade timer
+          clearTimeout(tooltipTimeout);
+          var tooltipTimeout = setTimeout(function() {
+            tooltip.style.opacity = 0;
+          }, 2000);
+        })
+        .catch(function(err) {
+          console.error("Failed to copy IP: ", err);
+        });
+    });
+
+    // Popup functionality
+    var openPopupButton = document.getElementById("openPopupButton");
+    var closePopupButton = document.getElementById("closePopupButton");
+    var popupContainer = document.getElementById("popupContainer");
+
+    openPopupButton.addEventListener("click", function() {
+      popupContainer.style.display = "flex";
+      // Load JSON data into the popup
+      var jsonData = {
+        "title": "Popup Title",
+        "fields": [
+          { "field": "Field 1", "body": "Body 1" },
+          { "field": "Field 2", "body": "Body 2" },
+          { "field": "Field 3", "body": "Body 3" }
+        ]
+      };
+      var popupTitle = document.getElementById("popupTitle");
+      popupTitle.textContent = jsonData.title;
+      var popupContent = document.getElementById("popupContent");
+      popupContent.innerHTML = ""; // Clear previous content
+      jsonData.fields.forEach(function(item) {
+        var fieldContainer = document.createElement("div");
+        fieldContainer.classList.add("popup-field");
+        var fieldTitle = document.createElement("div");
+        fieldTitle.classList.add("popup-field-title");
+        fieldTitle.textContent = item.field;
+        var fieldBody = document.createElement("div");
+        fieldBody.classList.add("popup-field-body");
+        fieldBody.textContent = item.body;
+        fieldContainer.appendChild(fieldTitle);
+        fieldContainer.appendChild(fieldBody);
+        popupContent.appendChild(fieldContainer);
+      });
+    });
+
+    closePopupButton.addEventListener("click", function() {
+      popupContainer.style.animation = "fadeOut 0.5s ease"; // Apply fade-out animation
+      setTimeout(function() {
+        popupContainer.style.display = "none"; // Hide the popup after animation completes
+        popupContainer.style.animation = ""; // Reset animation property
+      }, 500); // Wait for animation to complete (500ms)
+    });
   </script>
 </body>
 </html>
