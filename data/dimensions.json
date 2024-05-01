@@ -3,7 +3,7 @@
   "fields": [
     {
       "title": "Void",
-      "body": "A backrooms like dimension, enter by suffocating in sand or gravel, leave by going through a oak door.",
+      "body": "A backrooms like dimension. Enter by suffocating in sand or gravel, leave by going through a oak door.",
       "images": [
         "/data/images/void-1.png",
         "/data/images/void-2.png",
@@ -12,7 +12,7 @@
     },
     {
       "title": "Saturated",
-      "body": "A mythical world only accessible through the Void, enter by going through a warped door in the Void, leave by going through a iron door.",
+      "body": "A mythical place with lots of strange things. Enter by going through a warped door in the void, leave by going through a iron door.",
       "images": [
         "/data/images/sat-valley.png",
         "/data/images/sat-bone.png",
@@ -21,7 +21,7 @@
     },
     {
       "title": "Beyond the Clouds",
-      "body": "Vast floating islands, enter by flying past y 448 with an elytra, leave by falling below y -48 in the dimension.",
+      "body": "Floating islands with beautiful biomes. Enter by flying past y 448 with an elytra, leave by falling below y -48 in the dimension.",
       "images": [
         "/data/images/btc-cherry.png",
         "/data/images/btc-grove.png",
