@@ -2,6 +2,10 @@
   "title": "FAQ",
   "fields": [
     {
+      "title": "HOW DO I LINK MY ACCOUNT???",
+      "body": "Join the Discord, then join the Minecraft server. You will see a code. On Discord, go to the #link-account channel and send /verify <code>. Make sure you are sending a bot command!"
+    },
+    {
       "title": "How do I sit down?",
       "body": "Look straight down and double crouch."
     },
@@ -12,6 +16,34 @@
     {
       "title": "How does sleeping work?",
       "body": "Only 50% of players on the server have to sleep to pass the time this is rounded up."
+    },
+    {
+      "title": "How do I protect my stuff?",
+      "body": "You can claim an area protecting all your valuables within it's radius."
+    },
+    {
+      "title": "I can't place my claim block!",
+      "body": "Claim blocks cannot be placed if they are overlapping with another claim, even your own."
+    },
+    {
+      "title": "How many homes do I get?",
+      "body": "Players can have up to 4 homes plus their respawn point."
+    },
+    {
+      "title": "How many claims do I get?",
+      "body": "Players can have up to 4 claims."
+    },
+    {
+      "title": "What are upgrades, how do I craft them?",
+      "body": "Upgrades allow you to upgrade claims without having to destroy them, they share the same recipe as claims but the center is an Iron Ingot."
+    },
+    {
+      "title": "Is cheating allowed?",
+      "body": "Although the moderation is very laid back cheating is not allowed and you will be banned."
+    },
+    {
+      "title": "What mods are allowed?",
+      "body": "Mods such as Reacharound, Tweakeroo, Gamma Utils, and Litematica are allowed but not all modules within these are, avoid any automation or spammy things."
     }
   ]
 }
