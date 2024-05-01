@@ -33,25 +33,19 @@
       left: 50%;
       transform: translateX(-50%);
       background-color: rgba(0, 0, 0, 0.7);
-      padding: 10px 20px; /* Increased padding */
-      border-radius: 10px; /* Increased border-radius */
-      user-select: none; /* Prevent text selection */
-      z-index: 999; /* Ensure tooltip is above other elements */
-      font-size: 16px; /* Increased font size */
+      padding: 10px 20px;
+      border-radius: 10px;
+      user-select: none;
+      z-index: 999;
+      font-size: 16px;
     }
 
     .tooltip-auto {
-      top: 110%; /* Position tooltip 10% below the container */
+      top: 110%;
     }
 
     .tooltip-ip {
-      top: 150%; /* Position IP tooltip 50% below the container */
-    }
-
-    .tooltip-error {
-	  top: -35%; /* Position tooltip 10% below the container */
-      color: red; /* Change text color to red for error tooltips */
-      font-weight: bold; /* Make text bold for error tooltips */
+      top: 150%;
     }
 
     .top-container {
@@ -67,7 +61,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      user-select: none; /* Prevent text selection */
+      user-select: none;
     }
 
     .top-container a {
@@ -85,28 +79,28 @@
     }
 
     .container .button {
-      background-color: #6c757d; /* Grey background color */
+      background-color: #6c757d;
       color: white;
       text-decoration: none;
       padding: 8px 16px;
       border-radius: 5px;
-      border: none; /* Remove border */
-      cursor: pointer; /* Change cursor to pointer on hover */
-      margin-bottom: 10px; /* Add margin-bottom */
+      border: none;
+      cursor: pointer;
+      margin-bottom: 10px;
     }
 
     .container .button:hover {
-      background-color: #5a6268; /* Darker grey on hover */
+      background-color: #5a6268;
     }
-    
+
     .unselectable {
       user-select: none;
     }
 
     .top-title {
-      font-size: 24px; /* Set the font size to 24px */
+      font-size: 24px;
     }
-    
+
     .copyright {
       position: fixed;
       bottom: 10px;
@@ -116,20 +110,19 @@
       user-select: none;
     }
 
-    /* Popup styles */
     .popup-container {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
-      display: none; /* Initially hidden */
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
       justify-content: center;
       align-items: center;
-      z-index: 1000; /* Ensure it's above other elements */
-      backdrop-filter: blur(5px); /* Blur the background */
-      animation: fadeInOut 0.5s ease; /* Apply fade in and out animation */
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+      animation: fadeInOut 0.5s ease;
     }
 
     @keyframes fadeInOut {
@@ -143,13 +136,13 @@
     }
 
     .popup {
-      background-color: #191919; /* Use same theme as UI container */
+      background-color: #191919;
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* Drop shadow */
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
       position: relative;
-      width: 600px; /* Make the popup wider */
-      height: 400px; /* Make the popup taller */
+      width: 600px;
+      height: 400px;
       color: white;
       display: flex;
       flex-direction: column;
@@ -159,28 +152,28 @@
       font-size: 20px;
       font-weight: bold;
       margin-bottom: 20px;
-      align-self: flex-start; /* Align title to the left */
-      user-select: none; /* Prevent text selection */
+      align-self: flex-start;
+      user-select: none;
     }
 
     .popup-content {
-      flex-grow: 1; /* Allow content to grow */
-      overflow-y: auto; /* Enable vertical scrolling */
+      flex-grow: 1;
+      overflow-y: auto;
     }
 
     .popup-field {
-      margin-bottom: 20px; /* Increase spacing between fields */
+      margin-bottom: 20px;
     }
 
     .popup-field-title {
       font-weight: bold;
       margin-bottom: 5px;
-      user-select: none; /* Prevent text selection */
+      user-select: none;
     }
 
     .popup-field-body {
       margin-bottom: 10px;
-      user-select: none; /* Prevent text selection */
+      user-select: none;
     }
 
     .close-btn {
@@ -190,13 +183,12 @@
       cursor: pointer;
       font-weight: bold;
       font-size: 20px;
-      user-select: none; /* Prevent text selection */
+      user-select: none;
     }
 
-    /* Ensure popup stays within viewport */
     @media screen and (max-width: 600px) {
       .popup {
-        max-width: calc(100% - 40px); /* Adjust maximum width for smaller screens */
+        max-width: calc(100% - 40px);
       }
     }
   </style>
@@ -219,7 +211,6 @@
     <button class="button" id="copyIpButton">Copy IP</button>
     <div class="tooltip tooltip-ip" id="copyTooltip">IP copied to clipboard!</div>
     <div class="tooltip tooltip-auto" id="tooltip">Tooltip text</div>
-	<div class="tooltip tooltip-error" id="errorTooltip"></div>
   </div>
 
   <div class="popup-container" id="popupContainer">
@@ -243,8 +234,7 @@
         return data;
       } catch (error) {
         console.error('Error fetching tooltips:', error);
-        displayErrorTooltip('Failed to load tooltips.');
-        return ["Failed to load tooltips."];
+        return ["Houston, we have a problem!", "Something went wrong, but I’m not telling.", "Tooltips failed successfully!"];
       }
     }
 
@@ -274,7 +264,7 @@
     // Call the function to update tooltip
     updateTooltip();
 
-    // Your existing JavaScript code
+    // Function to copy IP address
     document.getElementById("copyIpButton").addEventListener("click", function() {
       var ip = "mc.polarsserver.lol";
       navigator.clipboard.writeText(ip)
@@ -286,26 +276,94 @@
           setTimeout(function() {
             tooltip.style.opacity = 0;
           }, 2000); // Hide tooltip after 2 seconds
-
-          // Reset tooltip fade timer
-          clearTimeout(tooltipTimeout);
-          var tooltipTimeout = setTimeout(function() {
-            tooltip.style.opacity = 0;
-          }, 2000);
         })
         .catch(function(err) {
           console.error("Failed to copy IP: ", err);
         });
     });
 
-    // Function to display error tooltip
-    function displayErrorTooltip(errorMessage) {
-      var errorTooltip = document.getElementById("errorTooltip");
-      errorTooltip.textContent = errorMessage;
-      errorTooltip.style.opacity = 1;
+    // Attach event listener to close button
+    document.getElementById("closePopupButton").addEventListener("click", function() {
+      var popupContainer = document.getElementById("popupContainer");
+      popupContainer.style.animation = "fadeOut 0.5s ease";
       setTimeout(function() {
-        errorTooltip.style.opacity = 0;
-      }, 5000); // Hide error tooltip after 5 seconds
+        popupContainer.style.display = "none";
+        popupContainer.style.animation = "";
+      }, 450); // Hide popup after animation
+    });
+
+    // Function to fetch data and display popup
+    async function fetchAndDisplayData(url) {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const jsonData = await response.json();
+
+        var popupTitle = document.getElementById("popupTitle");
+        popupTitle.textContent = jsonData.title;
+        var popupContent = document.getElementById("popupContent");
+        popupContent.innerHTML = ""; // Clear previous content
+        jsonData.fields.forEach(function(item) {
+          if(item.image && item.image.trim() !== "") { // Check if image URL is provided
+            var image = document.createElement("img");
+            image.setAttribute("src", item.image.trim());
+            image.setAttribute("alt", "Image");
+            popupContent.appendChild(image);
+          }
+          if(item.field && item.field.trim() !== "" && item.body && item.body.trim() !== "") { // Check if field and body are provided
+            var fieldContainer = document.createElement("div");
+            fieldContainer.classList.add("popup-field");
+            var fieldTitle = document.createElement("div");
+            fieldTitle.classList.add("popup-field-title");
+            fieldTitle.textContent = item.field;
+            var fieldBody = document.createElement("div");
+            fieldBody.classList.add("popup-field-body");
+            fieldBody.textContent = item.body;
+            fieldContainer.appendChild(fieldTitle);
+            fieldContainer.appendChild(fieldBody);
+            popupContent.appendChild(fieldContainer);
+          }
+        });
+
+        var popupContainer = document.getElementById("popupContainer");
+        popupContainer.style.display = "flex";
+        popupContainer.style.animation = "fadeInOut 0.5s ease";
+      } catch (error) {
+        console.error('Error fetching data or displaying popup:', error);
+        const jsonData = {
+          "title": "Something went wrong",
+          "fields": [{
+            "image": "",
+            "field": "Looks like there was an error loading this data.",
+            "body": "This could be for many reasons, don't blame me!"
+          }]
+        };
+        var popupTitle = document.getElementById("popupTitle");
+        popupTitle.textContent = jsonData.title;
+        var popupContent = document.getElementById("popupContent");
+        popupContent.innerHTML = ""; // Clear previous content
+        jsonData.fields.forEach(function(item) {
+          if(item.field && item.field.trim() !== "" && item.body && item.body.trim() !== "") { // Check if field and body are provided
+            var fieldContainer = document.createElement("div");
+            fieldContainer.classList.add("popup-field");
+            var fieldTitle = document.createElement("div");
+            fieldTitle.classList.add("popup-field-title");
+            fieldTitle.textContent = item.field;
+            var fieldBody = document.createElement("div");
+            fieldBody.classList.add("popup-field-body");
+            fieldBody.textContent = item.body;
+            fieldContainer.appendChild(fieldTitle);
+            fieldContainer.appendChild(fieldBody);
+            popupContent.appendChild(fieldContainer);
+          }
+        });
+
+        var popupContainer = document.getElementById("popupContainer");
+        popupContainer.style.display = "flex";
+        popupContainer.style.animation = "fadeInOut 0.5s ease";
+      }
     }
 
     // Attach click event listeners to buttons for displaying popups with data
@@ -324,41 +382,6 @@
     document.getElementById("faqButton").addEventListener("click", function() {
       fetchAndDisplayData('/data/faq.json');
     });
-
-    // Function to fetch data and display popup
-    async function fetchAndDisplayData(url) {
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const jsonData = await response.json();
-
-        var popupTitle = document.getElementById("popupTitle");
-        popupTitle.textContent = jsonData.title;
-        var popupContent = document.getElementById("popupContent");
-        popupContent.innerHTML = ""; // Clear previous content
-        jsonData.fields.forEach(function(item) {
-          var fieldContainer = document.createElement("div");
-          fieldContainer.classList.add("popup-field");
-          var fieldTitle = document.createElement("div");
-          fieldTitle.classList.add("popup-field-title");
-          fieldTitle.textContent = item.field;
-          var fieldBody = document.createElement("div");
-          fieldBody.classList.add("popup-field-body");
-          fieldBody.textContent = item.body;
-          fieldContainer.appendChild(fieldTitle);
-          fieldContainer.appendChild(fieldBody);
-          popupContent.appendChild(fieldContainer);
-        });
-
-        document.getElementById("popupContainer").style.display = "flex";
-      } catch (error) {
-        console.error('Error fetching data or displaying popup:', error);
-        displayErrorTooltip('Failed to load data.');
-      }
-    }
-
   </script>
 </body>
 </html>
