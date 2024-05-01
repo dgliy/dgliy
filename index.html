@@ -33,10 +33,11 @@
       left: 50%;
       transform: translateX(-50%);
       background-color: rgba(0, 0, 0, 0.7);
-      padding: 5px 10px;
-      border-radius: 5px;
+      padding: 10px 20px; /* Increased padding */
+      border-radius: 10px; /* Increased border-radius */
       user-select: none; /* Prevent text selection */
       z-index: 999; /* Ensure tooltip is above other elements */
+      font-size: 16px; /* Increased font size */
     }
 
     .tooltip-auto {
@@ -45,6 +46,12 @@
 
     .tooltip-ip {
       top: 150%; /* Position IP tooltip 50% below the container */
+    }
+
+    .tooltip-error {
+	  top: -35%; /* Position tooltip 10% below the container */
+      color: red; /* Change text color to red for error tooltips */
+      font-weight: bold; /* Make text bold for error tooltips */
     }
 
     .top-container {
@@ -199,10 +206,10 @@
     <div class="unselectable top-title">polarsserver</div>
     <div>
       <a href="https://discord.gg/pCwG5rXaUh" class="button" target="_blank">Discord</a>
-      <a href="#" class="button">Commands</a>
-      <a href="#" class="button">Recipes</a>
-      <a href="#" class="button">Dimensions</a>
-      <a href="#" class="button">FAQ</a>
+      <a href="#" class="button" id="commandsButton">Commands</a>
+      <a href="#" class="button" id="recipesButton">Recipes</a>
+      <a href="#" class="button" id="dimensionsButton">Dimensions</a>
+      <a href="#" class="button" id="faqButton">FAQ</a>
     </div>
   </div>
 
@@ -212,8 +219,7 @@
     <button class="button" id="copyIpButton">Copy IP</button>
     <div class="tooltip tooltip-ip" id="copyTooltip">IP copied to clipboard!</div>
     <div class="tooltip tooltip-auto" id="tooltip">Tooltip text</div>
-    <!-- Example of a popup trigger -->
-    <button class="button" id="openPopupButton">Open Popup</button>
+	<div class="tooltip tooltip-error" id="errorTooltip"></div>
   </div>
 
   <div class="popup-container" id="popupContainer">
@@ -237,7 +243,8 @@
         return data;
       } catch (error) {
         console.error('Error fetching tooltips:', error);
-        return [];
+        displayErrorTooltip('Failed to load tooltips.');
+        return ["Failed to load tooltips."];
       }
     }
 
@@ -291,48 +298,67 @@
         });
     });
 
-    // Popup functionality
-    var openPopupButton = document.getElementById("openPopupButton");
-    var closePopupButton = document.getElementById("closePopupButton");
-    var popupContainer = document.getElementById("popupContainer");
-
-    openPopupButton.addEventListener("click", function() {
-      popupContainer.style.display = "flex";
-      // Load JSON data into the popup
-      var jsonData = {
-        "title": "Popup Title",
-        "fields": [
-          { "field": "Field 1", "body": "Body 1" },
-          { "field": "Field 2", "body": "Body 2" },
-          { "field": "Field 3", "body": "Body 3" }
-        ]
-      };
-      var popupTitle = document.getElementById("popupTitle");
-      popupTitle.textContent = jsonData.title;
-      var popupContent = document.getElementById("popupContent");
-      popupContent.innerHTML = ""; // Clear previous content
-      jsonData.fields.forEach(function(item) {
-        var fieldContainer = document.createElement("div");
-        fieldContainer.classList.add("popup-field");
-        var fieldTitle = document.createElement("div");
-        fieldTitle.classList.add("popup-field-title");
-        fieldTitle.textContent = item.field;
-        var fieldBody = document.createElement("div");
-        fieldBody.classList.add("popup-field-body");
-        fieldBody.textContent = item.body;
-        fieldContainer.appendChild(fieldTitle);
-        fieldContainer.appendChild(fieldBody);
-        popupContent.appendChild(fieldContainer);
-      });
-    });
-
-    closePopupButton.addEventListener("click", function() {
-      popupContainer.style.animation = "fadeOut 0.5s ease"; // Apply fade-out animation
+    // Function to display error tooltip
+    function displayErrorTooltip(errorMessage) {
+      var errorTooltip = document.getElementById("errorTooltip");
+      errorTooltip.textContent = errorMessage;
+      errorTooltip.style.opacity = 1;
       setTimeout(function() {
-        popupContainer.style.display = "none"; // Hide the popup after animation completes
-        popupContainer.style.animation = ""; // Reset animation property
-      }, 500); // Wait for animation to complete (500ms)
+        errorTooltip.style.opacity = 0;
+      }, 5000); // Hide error tooltip after 5 seconds
+    }
+
+    // Attach click event listeners to buttons for displaying popups with data
+    document.getElementById("commandsButton").addEventListener("click", function() {
+      fetchAndDisplayData('/data/commands.json');
     });
+
+    document.getElementById("recipesButton").addEventListener("click", function() {
+      fetchAndDisplayData('/data/recipes.json');
+    });
+
+    document.getElementById("dimensionsButton").addEventListener("click", function() {
+      fetchAndDisplayData('/data/dimensions.json');
+    });
+
+    document.getElementById("faqButton").addEventListener("click", function() {
+      fetchAndDisplayData('/data/faq.json');
+    });
+
+    // Function to fetch data and display popup
+    async function fetchAndDisplayData(url) {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const jsonData = await response.json();
+
+        var popupTitle = document.getElementById("popupTitle");
+        popupTitle.textContent = jsonData.title;
+        var popupContent = document.getElementById("popupContent");
+        popupContent.innerHTML = ""; // Clear previous content
+        jsonData.fields.forEach(function(item) {
+          var fieldContainer = document.createElement("div");
+          fieldContainer.classList.add("popup-field");
+          var fieldTitle = document.createElement("div");
+          fieldTitle.classList.add("popup-field-title");
+          fieldTitle.textContent = item.field;
+          var fieldBody = document.createElement("div");
+          fieldBody.classList.add("popup-field-body");
+          fieldBody.textContent = item.body;
+          fieldContainer.appendChild(fieldTitle);
+          fieldContainer.appendChild(fieldBody);
+          popupContent.appendChild(fieldContainer);
+        });
+
+        document.getElementById("popupContainer").style.display = "flex";
+      } catch (error) {
+        console.error('Error fetching data or displaying popup:', error);
+        displayErrorTooltip('Failed to load data.');
+      }
+    }
+
   </script>
 </body>
 </html>
