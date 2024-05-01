@@ -1,0 +1,8 @@
+{
+  "title": "Dimensions",
+  "fields": [
+    { "field": "Void", "body": "A backrooms like dimension.\n(Enter by suffocating in sand or gravel)\n(Leave by going through a oak door)" },
+    { "field": "Saturated", "body": "A mythical world only accessible through the Void.\n(Enter by going through a warped door in the Void)\n(Leave by going through a iron door)" },
+    { "field": "Beyond the Clouds", "body": "Vast floating islands.\n(Enter by flying past y 448 with an elytra)\n(Leave by falling below y -48 in the dimension" }
+  ]
+}
