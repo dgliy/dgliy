@@ -2,7 +2,7 @@
   "title": "Dimensions",
   "fields": [
     { "image": "/data/images/void-1.png", "field": "Void", "body": "A backrooms like dimension, enter by suffocating in sand or gravel, leave by going through a oak door." },
-    { "field": "/data/images/sat-valley.png", "body": "A mythical world only accessible through the Void, enter by going through a warped door in the Void, leave by going through a iron door." },
-    { "field": "/data/images/btc-cherry.png", "body": "Vast floating islands, enter by flying past y 448 with an elytra, leave by falling below y -48 in the dimension." }
+    { "image": "/data/images/sat-valley.png", "body": "A mythical world only accessible through the Void, enter by going through a warped door in the Void, leave by going through a iron door." },
+    { "image": "/data/images/btc-cherry.png", "body": "Vast floating islands, enter by flying past y 448 with an elytra, leave by falling below y -48 in the dimension." }
   ]
 }
