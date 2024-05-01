@@ -12,33 +12,27 @@
     {
       "title": "/homes",
       "body": "Lists all homes you've made."
-    }
-  ],
+    },
     {
       "title": "/delhome <name>",
       "body": "Deletes a home."
-    }
-  ],
+    },
     {
       "title": "/pvp",
       "body": "Toggles PVP on or off."
-    }
-  ],
+    },
     {
       "title": "/tpa <player>",
       "body": "Request to teleport to a player."
-    }
-  ],
+    },
     {
       "title": "/tpahere <player>",
       "body": "Request a player to teleport to you."
-    }
-  ],
+    },
     {
       "title": "/tpacancel <player>",
       "body": "Cancel a tpa request."
-    }
-  ],
+    },
     {
       "title": "/tpaaccept <player>",
       "body": "Accept another players tpa request."
