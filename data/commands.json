@@ -7,7 +7,7 @@
     },
     {
       "title": "/home <name>",
-      "body": "Teleport to a home, leave empty to teleport to bed."
+      "body": "Teleport to a home, leave empty to teleport to respawn point."
     },
     {
       "title": "/homes",
