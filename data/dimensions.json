@@ -7,7 +7,7 @@
       "images": [
         "void-1.png",
         "void-2.png",
-        "void-3.png",
+        "void-3.png"
       ]
     },
     {
@@ -16,7 +16,7 @@
       "images": [
         "sat-valley.png",
         "sat-bone.png",
-        "satvoid-ocean.png",
+        "satvoid-ocean.png"
       ]
     },
     {
@@ -25,7 +25,7 @@
       "images": [
         "btc-cherry.png",
         "btc-grove.png",
-        "btc-lush.png",
+        "btc-lush.png"
       ]
     }
   ]
