@@ -325,6 +325,7 @@ async function fetchAndDisplayData(url) {
         field.images.forEach(function(image) {
           var imgElement = document.createElement("img");
           imgElement.setAttribute("src", image);
+		  imgElement.setAttribute("height", 100px);
           fieldContainer.appendChild(imgElement);
         });
       }
