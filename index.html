@@ -293,98 +293,81 @@
     });
 
     // Function to fetch data and display popup
-    async function fetchAndDisplayData(url) {
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const jsonData = await response.json();
-
-        var popupTitle = document.getElementById("popupTitle");
-        popupTitle.textContent = jsonData.title;
-        var popupContent = document.getElementById("popupContent");
-        popupContent.innerHTML = ""; // Clear previous content
-        jsonData.fields.forEach(function(item) {
-          if(item.title && item.title.trim() !== "" && item.body && item.body.trim() !== "") { // Check if field and body are provided
-            var fieldContainer = document.createElement("div");
-            fieldContainer.classList.add("popup-field");
-            var fieldTitle = document.createElement("div");
-            fieldTitle.classList.add("popup-field-title");
-            fieldTitle.textContent = item.title;
-            var fieldBody = document.createElement("div");
-            fieldBody.classList.add("popup-field-body");
-            fieldBody.textContent = item.body;
-            fieldContainer.appendChild(fieldTitle);
-            fieldContainer.appendChild(fieldBody);
-            popupContent.appendChild(fieldContainer);
-          }
-        });
-
-        if(jsonData.images && Array.isArray(jsonData.images) && jsonData.images.length > 0) {
-          var imagesContainer = document.createElement("div");
-          imagesContainer.classList.add("popup-field");
-          jsonData.images.forEach(function(imageUrl) {
-            var image = document.createElement("img");
-            image.setAttribute("src", imageUrl.trim());
-            image.setAttribute("alt", "Image");
-            image.style.maxWidth = "100%";
-            imagesContainer.appendChild(image);
-          });
-          popupContent.appendChild(imagesContainer);
-        }
-
-        var popupContainer = document.getElementById("popupContainer");
-        popupContainer.style.display = "flex";
-        popupContainer.style.animation = "fadeInOut 0.5s ease";
-      } catch (error) {
-        console.error('Error fetching data or displaying popup:', error);
-        const jsonData = {
-          "title": "Something went wrong",
-          "fields": [{
-            "title": "Looks like there was an error loading this data.",
-            "body": "This could be for many reasons, don't blame me!"
-          }],
-          "images": []
-        };
-        var popupTitle = document.getElementById("popupTitle");
-        popupTitle.textContent = jsonData.title;
-        var popupContent = document.getElementById("popupContent");
-        popupContent.innerHTML = ""; // Clear previous content
-        jsonData.fields.forEach(function(item) {
-          if(item.title && item.title.trim() !== "" && item.body && item.body.trim() !== "") { // Check if field and body are provided
-            var fieldContainer = document.createElement("div");
-            fieldContainer.classList.add("popup-field");
-            var fieldTitle = document.createElement("div");
-            fieldTitle.classList.add("popup-field-title");
-            fieldTitle.textContent = item.title;
-            var fieldBody = document.createElement("div");
-            fieldBody.classList.add("popup-field-body");
-            fieldBody.textContent = item.body;
-            fieldContainer.appendChild(fieldTitle);
-            fieldContainer.appendChild(fieldBody);
-            popupContent.appendChild(fieldContainer);
-          }
-        });
-
-        if(jsonData.images && Array.isArray(jsonData.images) && jsonData.images.length > 0) {
-          var imagesContainer = document.createElement("div");
-          imagesContainer.classList.add("popup-field");
-          jsonData.images.forEach(function(imageUrl) {
-            var image = document.createElement("img");
-            image.setAttribute("src", imageUrl.trim());
-            image.setAttribute("alt", "Image");
-            image.style.maxWidth = "100%";
-            imagesContainer.appendChild(image);
-          });
-          popupContent.appendChild(imagesContainer);
-        }
-
-        var popupContainer = document.getElementById("popupContainer");
-        popupContainer.style.display = "flex";
-        popupContainer.style.animation = "fadeInOut 0.5s ease";
-      }
+async function fetchAndDisplayData(url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
     }
+    const jsonData = await response.json();
+
+    var popupTitle = document.getElementById("popupTitle");
+    popupTitle.textContent = jsonData.title;
+    var popupContent = document.getElementById("popupContent");
+    popupContent.innerHTML = ""; // Clear previous content
+
+    jsonData.fields.forEach(function(field) {
+      var fieldContainer = document.createElement("div");
+      fieldContainer.classList.add("popup-field");
+      
+      var fieldTitle = document.createElement("div");
+      fieldTitle.classList.add("popup-field-title");
+      fieldTitle.textContent = field.title;
+
+      var fieldBody = document.createElement("div");
+      fieldBody.classList.add("popup-field-body");
+      fieldBody.textContent = field.body;
+
+      fieldContainer.appendChild(fieldTitle);
+      fieldContainer.appendChild(fieldBody);
+
+      if (field.images && field.images.length > 0) {
+        field.images.forEach(function(image) {
+          var imgElement = document.createElement("img");
+          imgElement.setAttribute("src", image);
+          fieldContainer.appendChild(imgElement);
+        });
+      }
+
+      popupContent.appendChild(fieldContainer);
+    });
+
+    var popupContainer = document.getElementById("popupContainer");
+    popupContainer.style.display = "flex";
+    popupContainer.style.animation = "fadeInOut 0.5s ease";
+  } catch (error) {
+    console.error('Error fetching data or displaying popup:', error);
+    // If an error occurs, display fallback data
+    const jsonData = {
+      "title": "Something went wrong",
+      "fields": [{
+        "title": "Looks like there was an error loading this data.",
+        "body": "This could be for many reasons, don't blame me!"
+      }]
+    };
+    var popupTitle = document.getElementById("popupTitle");
+    popupTitle.textContent = jsonData.title;
+    var popupContent = document.getElementById("popupContent");
+    popupContent.innerHTML = ""; // Clear previous content
+    jsonData.fields.forEach(function(item) {
+      var fieldContainer = document.createElement("div");
+      fieldContainer.classList.add("popup-field");
+      var fieldTitle = document.createElement("div");
+      fieldTitle.classList.add("popup-field-title");
+      fieldTitle.textContent = item.title;
+      var fieldBody = document.createElement("div");
+      fieldBody.classList.add("popup-field-body");
+      fieldBody.textContent = item.body;
+      fieldContainer.appendChild(fieldTitle);
+      fieldContainer.appendChild(fieldBody);
+      popupContent.appendChild(fieldContainer);
+    });
+
+    var popupContainer = document.getElementById("popupContainer");
+    popupContainer.style.display = "flex";
+    popupContainer.style.animation = "fadeInOut 0.5s ease";
+  }
+}
 
     // Attach click event listeners to buttons for displaying popups with data
     document.getElementById("commandsButton").addEventListener("click", function() {
