@@ -3,14 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vanilla+</title>
-  <link rel="shortcut icon" type="image/x-icon" href="/images/cat-favicon.ico">
+  <title>polarsserver.lol</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
       font-family: Arial, sans-serif;
-      background-color: #252525;
+      background-color: #050505;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -18,386 +15,116 @@
     }
 
     .container {
-      background-color: #191919;
-      width: 400px;
-	  height: 150px;
-      padding: 20px;
-      border-radius: 10px;
+      background-color: #101010;
+      padding: 2% 4%;
       text-align: center;
       color: white;
-      position: relative;
+	  user-select: none;
     }
 
-    .tooltip {
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 10px 20px;
-      border-radius: 10px;
-      user-select: none;
-      z-index: 999;
-      font-size: 16px;
+    .cat-gif {
+	  margin-bottom: 5%;
+	  max-height: 100%;
     }
 
-    .tooltip-auto {
-      top: 110%;
-    }
-
-    .tooltip-ip {
-      top: 150%;
-    }
-
-    .top-container {
-      background-color: #191919;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
+    .button {
+      padding: 5% 8%;
+      background-color: #303030;
       color: white;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      user-select: none;
-    }
-
-    .top-container a {
-      color: white;
-      text-decoration: none;
-      margin: 0 10px;
-      padding: 8px 16px;
-      border: 1px solid white;
-      border-radius: 5px;
+      border: none;
+      border-radius: 10%;
+      cursor: pointer;
       transition: background-color 0.3s ease;
     }
 
-    .top-container a:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .container .button {
-      background-color: #6c757d;
-      color: white;
-      text-decoration: none;
-      padding: 8px 16px;
-      border-radius: 5px;
-      border: none;
-      cursor: pointer;
-      margin-bottom: 10px;
-    }
-
-    .container .button:hover {
-      background-color: #5a6268;
-    }
-
-    .unselectable {
-      user-select: none;
-    }
-
-    .top-title {
-      font-size: 24px;
-    }
-
-    .copyright {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      color: white;
-      font-size: 12px;
-      user-select: none;
-    }
-	
-	.privacy-link {
-      color: lightblue; /* Set the color to blue */
-    }
-
-    .popup-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      backdrop-filter: blur(5px);
-      animation: fadeInOut 0.5s ease;
-    }
-
-    @keyframes fadeInOut {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    @keyframes fadeOut {
-      0% { opacity: 1; }
-      100% { opacity: 0; }
-    }
-
-    .popup {
-      background-color: #191919;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-      position: relative;
-      width: 50%;
-      height: 50%;
-      color: white;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .popup-title {
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      align-self: flex-start;
-      user-select: none;
-    }
-
-    .popup-content {
-      flex-grow: 1;
-      overflow-y: auto;
-    }
-
-    .popup-field {
-      margin-bottom: 20px;
-    }
-
-    .popup-field-title {
-      font-weight: bold;
-      margin-bottom: 5px;
-      user-select: none;
-    }
-
-    .popup-field-body {
-      margin-bottom: 10px;
-      user-select: none;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 20px;
-      user-select: none;
-    }
-
-    @media screen and (max-width: 600px) {
-      .popup {
-        max-width: calc(100% - 40px);
-      }
-    }
-
-    /* New CSS to make images not highlightable, draggable, or downloadable */
-    .popup-field img {
-      user-select: none;
-      -webkit-user-drag: none;
-      -khtml-user-drag: none;
-      -moz-user-drag: none;
-      -o-user-drag: none;
-      user-drag: none;
-      pointer-events: none;
+    .button:hover {
+      background-color: #202020;
     }
   </style>
 </head>
 <body>
-  <div class="top-container">
-    <div class="unselectable top-title">Vanilla+</div>
-    <div>
-      <a href="https://discord.gg/pCwG5rXaUh" class="button" target="_blank">Discord</a>
-      <a href="#" class="button" id="commandsButton" onclick="fetchAndDisplayData('/data/commands.json')">Commands</a>
-      <a href="#" class="button" id="recipesButton" onclick="fetchAndDisplayData('/data/recipes.json')">Recipes</a>
-      <a href="#" class="button" id="dimensionsButton" onclick="fetchAndDisplayData('/data/dimensions.json')">Dimensions</a>
-      <a href="#" class="button" id="faqButton" onclick="fetchAndDisplayData('/data/faq.json')">FAQ</a>
-    </div>
-  </div>
-
   <div class="container">
-    <h1 class="unselectable">Vanilla+</h1>
-    <p class="unselectable">A not quite vanilla Minecraft server.</p>
-    <button class="button" id="copyIpButton">Copy IP</button>
-    <div class="tooltip tooltip-auto" id="tooltip">Tooltip text</div>
-    <div class="tooltip tooltip-ip" id="copyTooltip">IP copied to clipboard!</div>
-  </div>
-
-  <div class="popup-container" id="popupContainer">
-    <div class="popup">
-      <div class="popup-title" id="popupTitle"></div>
-      <div class="close-btn" id="closePopupButton">X</div>
-      <div class="popup-content" id="popupContent"></div>
-    </div>
-  </div>
-
-  <div class="copyright">
-    &copy; Polar 2024 | <a href="#" class="privacy-link" onclick="fetchAndDisplayData('/data/privacy.json')">Privacy</a>
+    <h1>polarsserver.lol</h1>
+    <div id="catGifContainer"></div>
+    <button onclick="loadCatGif()" class="button" id="catButton">Cat</button>
   </div>
 
   <script>
-    // Function to fetch tooltips from JSON file
-    async function fetchTooltips() {
-      try {
-        const response = await fetch('/data/tooltips.json');
-        const data = await response.json();
-        return data;
-      } catch (error) {
-        console.error('Error fetching tooltips:', error);
-        return ["Houston, we have a problem!", "Something went wrong, but I’m not telling.", "Tooltips failed successfully!"];
-      }
-    }
+    var loadedGifUrls = [];
+    var loadCount = 0;
+    var cachedResponse = null;
 
-    // Function to update tooltip text
-    async function updateTooltip() {
-      const tooltips = await fetchTooltips();
-      const tooltipElement = document.getElementById("tooltip");
-      let tooltipIndex = 0;
-
-      setInterval(async function() {
-        // Fade out the tooltip
-        tooltipElement.style.opacity = 0;
-
-        // Update tooltip index
-        tooltipIndex = (tooltipIndex + 1) % tooltips.length;
-        
-        // Update tooltip text after fade out
-        setTimeout(function() {
-          tooltipElement.textContent = tooltips[tooltipIndex];
-          
-          // Fade in the tooltip
-          tooltipElement.style.opacity = 1;
-        }, 300);
-      }, 3000); // Change tooltip every 3 seconds
-    }
-
-    // Call the function to update tooltip
-    updateTooltip();
-
-    // Function to copy IP address
-    document.getElementById("copyIpButton").addEventListener("click", function() {
-      var ip = "mc.polarsserver.lol";
-      navigator.clipboard.writeText(ip)
-        .then(function() {
-          console.log("IP copied to clipboard: " + ip);
-          var tooltip = document.getElementById("copyTooltip");
-          tooltip.textContent = "IP copied to clipboard!";
-          tooltip.style.opacity = 1;
-          setTimeout(function() {
-            tooltip.style.opacity = 0;
-          }, 2000); // Hide tooltip after 2 seconds
-        })
-        .catch(function(err) {
-          console.error("Failed to copy IP: ", err);
-        });
-    });
-
-    // Attach event listener to close button
-    document.getElementById("closePopupButton").addEventListener("click", function() {
-      var popupContainer = document.getElementById("popupContainer");
-      popupContainer.style.animation = "fadeOut 0.5s ease";
-      setTimeout(function() {
-        popupContainer.style.display = "none";
-        popupContainer.style.animation = "";
-      }, 450); // Hide popup after animation
-    });
-
-    // Close popup when clicking outside of it
-    window.addEventListener("click", function(event) {
-      var popupContainer = document.getElementById("popupContainer");
-      if (event.target === popupContainer) {
-        popupContainer.style.animation = "fadeOut 0.5s ease";
-        setTimeout(function() {
-          popupContainer.style.display = "none";
-          popupContainer.style.animation = "";
-        }, 450); // Hide popup after animation
-      }
-    });
-
-    // Function to fetch data and display popup
-async function fetchAndDisplayData(url) {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error('Failed to fetch data');
-    }
-    const jsonData = await response.json();
-
-    var popupTitle = document.getElementById("popupTitle");
-    popupTitle.textContent = jsonData.title;
-    var popupContent = document.getElementById("popupContent");
-    popupContent.innerHTML = ""; // Clear previous content
-
-    jsonData.fields.forEach(function(field) {
-      var fieldContainer = document.createElement("div");
-      fieldContainer.classList.add("popup-field");
-      
-      var fieldTitle = document.createElement("div");
-      fieldTitle.classList.add("popup-field-title");
-      fieldTitle.textContent = field.title;
-
-      var fieldBody = document.createElement("div");
-      fieldBody.classList.add("popup-field-body");
-      fieldBody.textContent = field.body;
-
-      fieldContainer.appendChild(fieldTitle);
-      fieldContainer.appendChild(fieldBody);
-
-      if (field.images && field.images.length > 0) {
-        field.images.forEach(function(image) {
-          var imgElement = document.createElement("img");
-          imgElement.setAttribute("src", image);
-          imgElement.setAttribute("height", "100px"); // Adjust size if needed
-          fieldContainer.appendChild(imgElement);
-        });
-      }
-
-      popupContent.appendChild(fieldContainer);
-    });
-
-    var popupContainer = document.getElementById("popupContainer");
-    popupContainer.style.display = "flex";
-    popupContainer.style.animation = "fadeInOut 0.5s ease";
-  } catch (error) {
-    console.error('Error fetching data or displaying popup:', error);
-    // If an error occurs, display fallback data
-    const jsonData = {
-      "title": "Something went wrong",
-      "fields": [{
-        "title": "Looks like there was an error loading this data.",
-        "body": "This could be for many reasons, don't blame me!"
-      }]
+    window.onload = function() {
+      loadCatGif();
     };
-    var popupTitle = document.getElementById("popupTitle");
-    popupTitle.textContent = jsonData.title;
-    var popupContent = document.getElementById("popupContent");
-    popupContent.innerHTML = ""; // Clear previous content
-    jsonData.fields.forEach(function(item) {
-      var fieldContainer = document.createElement("div");
-      fieldContainer.classList.add("popup-field");
-      var fieldTitle = document.createElement("div");
-      fieldTitle.classList.add("popup-field-title");
-      fieldTitle.textContent = item.title;
-      var fieldBody = document.createElement("div");
-      fieldBody.classList.add("popup-field-body");
-      fieldBody.textContent = item.body;
-      fieldContainer.appendChild(fieldTitle);
-      fieldContainer.appendChild(fieldBody);
-      popupContent.appendChild(fieldContainer);
-    });
 
-    var popupContainer = document.getElementById("popupContainer");
-    popupContainer.style.display = "flex";
-    popupContainer.style.animation = "fadeInOut 0.5s ease";
-  }
-}
+    function loadCatGif() {
+      var container = document.getElementById("catGifContainer");
+      var catButton = document.getElementById("catButton");
+      container.innerHTML = "";
+      catButton.disabled = true;
+
+      if (loadCount >= 50) {
+        loadedGifUrls = [];
+        loadCount = 0;
+        cachedResponse = null;
+      }
+
+      if (cachedResponse) {
+        displayRandomGif(container, catButton, cachedResponse);
+        catButton.disabled = false;
+        loadCount++;
+      } else {
+        fetchCachedResponse(container, catButton);
+      }
+    }
+
+    function fetchCachedResponse(container, catButton) {
+      fetch("https://api.codetabs.com/v1/proxy?quest=https://tenor.com/search/cats-gifs")
+        .then(response => response.text())
+        .then(data => {
+          cachedResponse = data;
+          displayRandomGif(container, catButton, cachedResponse);
+          catButton.disabled = false;
+          loadCount++;
+        })
+        .catch(error => {
+          console.error("Error fetching cat GIFs:", error);
+          var errorMessage = document.createElement("p");
+          errorMessage.textContent = "Error fetching cat GIFs. Please try again later.";
+          container.appendChild(errorMessage);
+          catButton.disabled = false;
+        });
+    }
+
+    function displayRandomGif(container, catButton, data) {
+      var parser = new DOMParser();
+      var htmlDoc = parser.parseFromString(data, 'text/html');
+      var gifs = htmlDoc.querySelectorAll("img");
+
+      var validGifs = [];
+      gifs.forEach(gif => {
+        if (gif.src.endsWith(".gif") && !loadedGifUrls.includes(gif.src)) {
+          validGifs.push(gif.src);
+        }
+      });
+
+      if (validGifs.length === 0) {
+        var errorMessage = document.createElement("p");
+        errorMessage.textContent = "No new cat GIFs found. Try again later.";
+        container.appendChild(errorMessage);
+      } else {
+        var randomIndex = Math.floor(Math.random() * validGifs.length);
+        var randomGifUrl = validGifs[randomIndex];
+
+        loadedGifUrls.push(randomGifUrl);
+
+        var img = document.createElement("img");
+        img.src = randomGifUrl;
+        img.classList.add("cat-gif");
+        container.appendChild(img);
+      }
+    }
   </script>
 </body>
 </html>
