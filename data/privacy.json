@@ -2,15 +2,15 @@
   "title": "Privacy",
   "fields": [
     {
-      "title": "How safe is my IP Address?",
+      "title": "How safe is my IP address?",
       "body": "Your connection is proxied and your IP is never sent to us."
     },
     {
-      "title": "How safe is my Minecraft Information?",
+      "title": "How safe is my Minecraft information?",
       "body": "Your username and UUID is stored to verify you and can be accessed by staff."
     },
     {
-      "title": "How safe is my Discord Information?",
+      "title": "How safe is my Discord information?",
       "body": "Your username is stored to verify you and can be accessed by staff."
     },
     {
