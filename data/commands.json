@@ -1,0 +1,14 @@
+{
+  "title": "Commands",
+  "fields": [
+    { "field": "/sethome <name>", "body": "Creates a home" },
+    { "field": "/home <name>", "body": "Teleport to a home.\n(Leave empty to teleport to bed)" },
+    { "field": "/homes", "body": "Lists all homes you've made." },
+    { "field": "/delhome <name>", "body": "Deletes a home" },
+	{ "field": "/pvp", "body": "Toggles PVP on or off." },
+	{ "field": "/tpa <player>", "body": "Request to teleport to a player." },
+	{ "field": "/tpahere <player>", "body": "Request a player to teleport to you." },
+	{ "field": "/tpacancel <player>", "body": "Cancel a tpa request." },
+	{ "field": "/tpaaccept <player>", "body": "Accept another players tpa request." }
+  ]
+}
