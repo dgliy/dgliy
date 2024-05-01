@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>polarsserver.lol</title>
+  <title>Vanilla+</title>
+  <link rel="shortcut icon" type="image/x-icon" href="/data/images/favicon.ico">
   <style>
     body {
       margin: 0;
@@ -19,6 +20,7 @@
     .container {
       background-color: #191919;
       width: 400px;
+	  height: 150px;
       padding: 20px;
       border-radius: 10px;
       text-align: center;
@@ -109,6 +111,10 @@
       font-size: 12px;
       user-select: none;
     }
+	
+	.privacy-link {
+      color: lightblue;
+    }
 
     .popup-container {
       position: fixed;
@@ -141,8 +147,8 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
       position: relative;
-      width: 600px;
-      height: 400px;
+      width: 50%;
+      height: 50%;
       color: white;
       display: flex;
       flex-direction: column;
@@ -191,26 +197,36 @@
         max-width: calc(100% - 40px);
       }
     }
+
+    .popup-field img {
+      user-select: none;
+      -webkit-user-drag: none;
+      -khtml-user-drag: none;
+      -moz-user-drag: none;
+      -o-user-drag: none;
+      user-drag: none;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
   <div class="top-container">
-    <div class="unselectable top-title">polarsserver</div>
+    <div class="unselectable top-title">Vanilla+</div>
     <div>
       <a href="https://discord.gg/pCwG5rXaUh" class="button" target="_blank">Discord</a>
-      <a href="#" class="button" id="commandsButton">Commands</a>
-      <a href="#" class="button" id="recipesButton">Recipes</a>
-      <a href="#" class="button" id="dimensionsButton">Dimensions</a>
-      <a href="#" class="button" id="faqButton">FAQ</a>
+      <a href="#" class="button" id="commandsButton" onclick="fetchAndDisplayData('/data/commands.json')">Commands</a>
+      <a href="#" class="button" id="recipesButton" onclick="fetchAndDisplayData('/data/recipes.json')">Recipes</a>
+      <a href="#" class="button" id="dimensionsButton" onclick="fetchAndDisplayData('/data/dimensions.json')">Dimensions</a>
+      <a href="#" class="button" id="faqButton" onclick="fetchAndDisplayData('/data/faq.json')">FAQ</a>
     </div>
   </div>
 
   <div class="container">
-    <h1 class="unselectable">polarsserver.lol</h1>
+    <h1 class="unselectable">Vanilla+</h1>
     <p class="unselectable">A not quite vanilla Minecraft server.</p>
     <button class="button" id="copyIpButton">Copy IP</button>
-    <div class="tooltip tooltip-ip" id="copyTooltip">IP copied to clipboard!</div>
     <div class="tooltip tooltip-auto" id="tooltip">Tooltip text</div>
+    <div class="tooltip tooltip-ip" id="copyTooltip">IP copied to clipboard!</div>
   </div>
 
   <div class="popup-container" id="popupContainer">
@@ -222,11 +238,10 @@
   </div>
 
   <div class="copyright">
-    &copy; Polar 2024
+    &copy; Polar 2024 | <a href="#" class="privacy-link" onclick="fetchAndDisplayData('/data/privacy.json')">Privacy</a>
   </div>
 
   <script>
-    // Function to fetch tooltips from JSON file
     async function fetchTooltips() {
       try {
         const response = await fetch('/data/tooltips.json');
@@ -238,33 +253,23 @@
       }
     }
 
-    // Function to update tooltip text
     async function updateTooltip() {
       const tooltips = await fetchTooltips();
       const tooltipElement = document.getElementById("tooltip");
       let tooltipIndex = 0;
 
       setInterval(async function() {
-        // Fade out the tooltip
         tooltipElement.style.opacity = 0;
-
-        // Update tooltip index
         tooltipIndex = (tooltipIndex + 1) % tooltips.length;
-        
-        // Update tooltip text after fade out
         setTimeout(function() {
           tooltipElement.textContent = tooltips[tooltipIndex];
-          
-          // Fade in the tooltip
           tooltipElement.style.opacity = 1;
         }, 300);
-      }, 3000); // Change tooltip every 3 seconds
+      }, 3000);
     }
-
-    // Call the function to update tooltip
+	  
     updateTooltip();
 
-    // Function to copy IP address
     document.getElementById("copyIpButton").addEventListener("click", function() {
       var ip = "mc.polarsserver.lol";
       navigator.clipboard.writeText(ip)
@@ -275,24 +280,33 @@
           tooltip.style.opacity = 1;
           setTimeout(function() {
             tooltip.style.opacity = 0;
-          }, 2000); // Hide tooltip after 2 seconds
+          }, 2000);
         })
         .catch(function(err) {
           console.error("Failed to copy IP: ", err);
         });
     });
 
-    // Attach event listener to close button
     document.getElementById("closePopupButton").addEventListener("click", function() {
       var popupContainer = document.getElementById("popupContainer");
       popupContainer.style.animation = "fadeOut 0.5s ease";
       setTimeout(function() {
         popupContainer.style.display = "none";
         popupContainer.style.animation = "";
-      }, 450); // Hide popup after animation
+      }, 450);
     });
 
-    // Function to fetch data and display popup
+    window.addEventListener("click", function(event) {
+      var popupContainer = document.getElementById("popupContainer");
+      if (event.target === popupContainer) {
+        popupContainer.style.animation = "fadeOut 0.5s ease";
+        setTimeout(function() {
+          popupContainer.style.display = "none";
+          popupContainer.style.animation = "";
+        }, 450);
+      }
+    });
+
 async function fetchAndDisplayData(url) {
   try {
     const response = await fetch(url);
@@ -300,36 +314,30 @@ async function fetchAndDisplayData(url) {
       throw new Error('Failed to fetch data');
     }
     const jsonData = await response.json();
-
     var popupTitle = document.getElementById("popupTitle");
     popupTitle.textContent = jsonData.title;
     var popupContent = document.getElementById("popupContent");
-    popupContent.innerHTML = ""; // Clear previous content
-
+    popupContent.innerHTML = "";
     jsonData.fields.forEach(function(field) {
       var fieldContainer = document.createElement("div");
       fieldContainer.classList.add("popup-field");
-      
       var fieldTitle = document.createElement("div");
       fieldTitle.classList.add("popup-field-title");
       fieldTitle.textContent = field.title;
-
       var fieldBody = document.createElement("div");
       fieldBody.classList.add("popup-field-body");
       fieldBody.textContent = field.body;
-
       fieldContainer.appendChild(fieldTitle);
       fieldContainer.appendChild(fieldBody);
-
       if (field.images && field.images.length > 0) {
         field.images.forEach(function(image) {
           var imgElement = document.createElement("img");
           imgElement.setAttribute("src", image);
-		  imgElement.setAttribute("height", "100px");
+          imgElement.setAttribute("height", "100px");
           fieldContainer.appendChild(imgElement);
         });
       }
-
+	    
       popupContent.appendChild(fieldContainer);
     });
 
@@ -338,7 +346,6 @@ async function fetchAndDisplayData(url) {
     popupContainer.style.animation = "fadeInOut 0.5s ease";
   } catch (error) {
     console.error('Error fetching data or displaying popup:', error);
-    // If an error occurs, display fallback data
     const jsonData = {
       "title": "Something went wrong",
       "fields": [{
@@ -349,7 +356,7 @@ async function fetchAndDisplayData(url) {
     var popupTitle = document.getElementById("popupTitle");
     popupTitle.textContent = jsonData.title;
     var popupContent = document.getElementById("popupContent");
-    popupContent.innerHTML = ""; // Clear previous content
+    popupContent.innerHTML = "";
     jsonData.fields.forEach(function(item) {
       var fieldContainer = document.createElement("div");
       fieldContainer.classList.add("popup-field");
@@ -369,23 +376,6 @@ async function fetchAndDisplayData(url) {
     popupContainer.style.animation = "fadeInOut 0.5s ease";
   }
 }
-
-    // Attach click event listeners to buttons for displaying popups with data
-    document.getElementById("commandsButton").addEventListener("click", function() {
-      fetchAndDisplayData('/data/commands.json');
-    });
-
-    document.getElementById("recipesButton").addEventListener("click", function() {
-      fetchAndDisplayData('/data/recipes.json');
-    });
-
-    document.getElementById("dimensionsButton").addEventListener("click", function() {
-      fetchAndDisplayData('/data/dimensions.json');
-    });
-
-    document.getElementById("faqButton").addEventListener("click", function() {
-      fetchAndDisplayData('/data/faq.json');
-    });
   </script>
 </body>
 </html>
