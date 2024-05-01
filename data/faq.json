@@ -1,0 +1,8 @@
+{
+  "title": "FAQ",
+  "fields": [
+    { "field": "How do I sit down?", "body": "Look straight down and double crouch." },
+    { "field": "How do I wear Banners/Special Blocks?", "body": "Have an empty helmet slot and spam crouch with the banner/block in main hand." },
+    { "field": "How does sleeping work?", "body": "Only 50% of players on the server have to sleep to pass the time this is rounded up." }
+  ]
+}
