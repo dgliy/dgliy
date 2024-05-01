@@ -1,8 +1,8 @@
 {
   "title": "Dimensions",
   "fields": [
-    { "field": "Void", "body": "A backrooms like dimension.<br>(Enter by suffocating in sand or gravel)<br>(Leave by going through a oak door)" },
-    { "field": "Saturated", "body": "A mythical world only accessible through the Void.<br>(Enter by going through a warped door in the Void)<br>(Leave by going through a iron door)" },
-    { "field": "Beyond the Clouds", "body": "Vast floating islands.<br>(Enter by flying past y 448 with an elytra)<br>(Leave by falling below y -48 in the dimension)" }
+    { "field": "Void", "body": "A backrooms like dimension, enter by suffocating in sand or gravel, leave by going through a oak door." },
+    { "field": "Saturated", "body": "A mythical world only accessible through the Void, enter by going through a warped door in the Void, leave by going through a iron door." },
+    { "field": "Beyond the Clouds", "body": "Vast floating islands, enter by flying past y 448 with an elytra, leave by falling below y -48 in the dimension." }
   ]
 }
