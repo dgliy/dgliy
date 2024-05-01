@@ -6,6 +6,10 @@
       "body": "Join the Discord, then join the Minecraft server. You will see a code. On Discord, go to the #link-account channel and send /verify <code>. Make sure you are sending a bot command!"
     },
     {
+      "title": "What are the loot box chances?",
+      "body": "Common: 1199, Rare: 4804, Epic: 37866, Legendary: 76000. Stats are player specific do /trigger mt_stats and check your chances on mine-treasure.com/loot"
+    },
+    {
       "title": "How do I sit down?",
       "body": "Look straight down and double crouch."
     },
