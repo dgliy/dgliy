@@ -1,0 +1,82 @@
+{
+  "title": "Recipes",
+  "fields": [
+    {
+      "title": "Makeshift Claim Anchor",
+      "body": "Claims a 15 block radius.",
+      "images": [
+        "/data/images/recipe-wood.png"
+      ]
+    },
+    {
+      "title": "Reinforced Claim Anchor",
+      "body": "Claims a 25 block radius.",
+      "images": [
+        "/data/images/recipe-iron.png"
+      ]
+    },
+    {
+      "title": "Glistening Claim Anchor",
+      "body": "Claims a 35 block radius.",
+      "images": [
+        "/data/images/recipe-gold.png"
+      ]
+    },
+    {
+      "title": "Crystal Claim Anchor",
+      "body": "Claims a 75 block radius.",
+      "images": [
+        "/data/images/recipe-diamond.png"
+      ]
+    },
+    {
+      "title": "Emeradic Claim Anchor",
+      "body": "Claims a 100 block radius.",
+      "images": [
+        "/data/images/recipe-emerald.png"
+      ]
+    },
+    {
+      "title": "Withered Claim Anchor",
+      "body": "Claims a 250 block radius.",
+      "images": [
+        "/data/images/recipe-wither.png"
+      ]
+    },
+    {
+      "title": "Heaven Wings",
+      "body": "Allows player to toggle flight inside claim.",
+      "images": [
+        "/data/images/recipe-fly.png"
+      ]
+    },
+    {
+      "title": "Explosion Controller",
+      "body": "Allows player to toggle explosions inside claim.",
+      "images": [
+        "/data/images/recipe-explode.png"
+      ]
+    },
+    {
+      "title": "Greeter",
+      "body": "Allows player to send a message to players entering the claim.",
+      "images": [
+        "/data/images/recipe-greeter.png"
+      ]
+    },
+    {
+      "title": "Goggles of Revealing",
+      "body": "Allows player to see claim borders.",
+      "images": [
+        "/data/images/recipe-goggles.png"
+      ]
+    },
+    {
+      "title": "Trade Shop",
+      "body": "Allows player to sell items.",
+      "images": [
+        "/data/images/recipe-shop.png"
+      ]
+    },
+  ]
+}
