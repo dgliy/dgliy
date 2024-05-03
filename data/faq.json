@@ -6,6 +6,14 @@
       "body": "Join the Discord, then join the Minecraft server. You will see a code. On Discord, go to the #link-account channel and send /verify <code>. Make sure you are sending a bot command!"
     },
     {
+      "title": "Is cheating allowed?",
+      "body": "Although the moderation is very laid back cheating is not allowed and you will be banned."
+    },
+    {
+      "title": "What mods are allowed?",
+      "body": "Mods such as Reacharound, Tweakeroo, Gamma Utils, and Litematica are allowed but not all modules within these are, avoid anything that would cause lag."
+    },
+    {
       "title": "What are the loot box chances?",
       "body": "Common: 1199, Rare: 4804, Epic: 37866, Legendary: 76000. Stats are player specific do /trigger mt_stats and check your chances on mine-treasure.com/loot"
     },
@@ -42,12 +50,8 @@
       "body": "Upgrades allow you to upgrade claims without having to destroy them, they share the same recipe as claims but the center is an Iron Ingot."
     },
     {
-      "title": "Is cheating allowed?",
-      "body": "Although the moderation is very laid back cheating is not allowed and you will be banned."
-    },
-    {
-      "title": "What mods are allowed?",
-      "body": "Mods such as Reacharound, Tweakeroo, Gamma Utils, and Litematica are allowed but not all modules within these are, avoid any automation or spammy things."
+      "title": "How do I check the mobcap/Spawnrates?",
+      "body": "Placing a black carpet will list the mobcaps, a pink one will list the spawnrates for that block."
     }
   ]
 }
