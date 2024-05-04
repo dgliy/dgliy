@@ -50,7 +50,7 @@
       "body": "Upgrades allow you to upgrade claims without having to destroy them, they share the same recipe as claims but the center is an Iron Ingot."
     },
     {
-      "title": "How do I check the mobcap/Spawnrates?",
+      "title": "How do I check the mobcap/spawnrates?",
       "body": "Placing a black carpet will list the mobcaps, a pink one will list the spawnrates for that block."
     }
   ]
