@@ -36,6 +36,10 @@
     {
       "title": "/tpaaccept <player>",
       "body": "Accept another players tpa request."
+    },
+    {
+      "title": "/fabric tps",
+      "body": "Shows TPS stats about dimensions."
     }
   ]
 }
